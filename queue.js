@@ -1,31 +1,30 @@
 class Node {
   constructor(val) {
     this.val = val;
-    this.next = null;
+    this.next = next;
   }
 }
 
-class Stack {
+class Queue {
   constructor() {
     this.first = null;
     this.last = null;
     this.size = 0;
   }
 
-  push(val) {
+  enqueue(val) {
     let newNode = new Node(val);
     if (!this.first) {
       this.first = newNode;
       this.last = newNode;
     } else {
-      let oldFirst = this.first;
-      this.first = newNode;
-      this.first.next = oldFirst;
+      this.last.next = newNode;
+      this.last = newNode;
     }
     return ++this.size;
   }
 
-  pop() {
+  dequeue() {
     if (!this.first) return null;
     let oldFirst = this.first;
     if (this.first === this.last) {
@@ -33,6 +32,7 @@ class Stack {
     }
     this.first = this.first.next;
     this.size--;
-    return oldFirst.value;
+    oldFirst.next = null;
+    return oldFirst.val;
   }
 }
