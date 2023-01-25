@@ -12,7 +12,7 @@ class BST {
   }
 
   insert(value) {
-    let newNode = new Node();
+    let newNode = new Node(value);
     if (this.root === null) {
       this.root = newNode;
       return this;
@@ -59,4 +59,75 @@ class BST {
     if (!found) return false;
     return current;
   }
+
+  bfs() {
+    let data = [];
+    let queue = [];
+    let node = this.root;
+
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift();
+      data.push(node.value);
+      if (node.left) {
+        queue.push(node.left);
+      }
+      if (node.right) {
+        queue.push(node.right);
+      }
+    }
+    return data;
+  }
+
+  dfsPreOrder() {
+    let data = [];
+    let current = this.root;
+
+    function traverse(node) {
+      data.push(node.value);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+    }
+    traverse(current);
+    return data;
+  }
+
+  dfsPostOrder() {
+    let data = [];
+    let current = this.root;
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      data.push(node.value);
+    }
+    traverse(current);
+    return data;
+  }
+
+  dfsInOrder() {
+    let data = [];
+    let current = this.root;
+
+    function traverse(node) {
+      if (node.left) traverse(node.left);
+      data.push(node.value);
+      if (node.right) traverse(node.right);
+    }
+    traverse(current);
+    return data;
+  }
 }
+
+let tree = new BST();
+tree.insert(10);
+tree.insert(6);
+tree.insert(15);
+tree.insert(3);
+tree.insert(8);
+tree.insert(20);
+
+console.log(tree.bfs());
+console.log(tree.dfsPreOrder());
+console.log(tree.dfsPostOrder());
+console.log(tree.dfsInOrder());

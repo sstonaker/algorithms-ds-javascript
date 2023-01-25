@@ -135,7 +135,7 @@ class LinkedList {
     this.tail = node;
     let previous = null;
     let next = null;
-    
+
     for (let i = 0; i < this.length; i++) {
       node = node.next;
       node.next = previous;
@@ -159,4 +159,4 @@ list.push("Is");
 list.push("Steven");
 
 console.log(list);
-console.log(list.get(2));
+console.log(list.pop());
