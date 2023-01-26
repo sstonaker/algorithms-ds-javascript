@@ -29,6 +29,7 @@ class HashTable {
   set(key, value) {
     let index = this._hash(key);
     if (!this.keyMap[index]) {
+      // Better implementation is to overwrite
       this.keyMap[index] = [];
       this.keyMap[index].push([key, value]);
     }
